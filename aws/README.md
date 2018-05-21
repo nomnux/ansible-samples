@@ -10,5 +10,5 @@
 ## Installation
 
 ```
-$ pip install boto boto3 --user
+$ pip install boto boto3 [--user]
 ```
