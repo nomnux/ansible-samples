@@ -1,0 +1,10 @@
+---
+
+- hosts: aws
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: create iam group
+      iam_group:
+        name: testgroup1
+        state: present

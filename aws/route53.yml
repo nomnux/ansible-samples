@@ -1,0 +1,31 @@
+---
+
+- hosts: aws
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: create a public zone
+      route53_zone:
+        zone: example.jp
+        comment: this is an example zone
+  tags:
+    - zone
+
+
+- hosts: aws
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: create record set
+      route53:
+        state: present
+        zone: example.jp
+        record: www.example.jp
+        type: A
+        ttl: 7200
+        value:
+          - xxx.xxx.xxx.xxx
+          - yyy.yyy.yyy.yyy
+        wait: yes
+  tags:
+    - record
