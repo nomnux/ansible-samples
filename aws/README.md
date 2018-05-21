@@ -2,6 +2,7 @@
 
 ## Requirements
 
+* Ansible
 * Python boto, boto3
 * AWS credentials
     * ~/.aws/config
@@ -10,5 +11,5 @@
 ## Installation
 
 ```
-$ pip install boto boto3 [--user]
+$ pip install ansible boto boto3 [--user]
 ```
