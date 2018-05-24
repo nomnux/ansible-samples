@@ -11,34 +11,23 @@
   tags:
     - zone
 
-
 - hosts: localhost
   connection: local
   gather_facts: False
   tasks:
-    - name: create record set www.example.jp
+    - name: create record sets
       route53:
         state: present
         zone: example.jp
-        record: www.example.jp
+        record: "{{ item.fqdn }}"
         type: A
         ttl: 7200
         value:
-          - 192.168.1.1
-          - 192.168.2.1
+          - "{{ item.ipaddr1 }}"
+          - "{{ item.ipaddr2 }}"
         wait: yes
         overwrite: yes
-    - name: create record set www2.example.jp
-      route53:
-        state: present
-        zone: example.jp
-        record: www2.example.jp
-        type: A
-        ttl: 7200
-        value:
-          - 192.168.1.2
-          - 192.168.2.2
-        wait: yes
-        overwrite: yes
+      with_items:
+        - "{{ route53_record_sets }}"
   tags:
     - record
