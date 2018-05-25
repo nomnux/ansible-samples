@@ -1,0 +1,16 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: delete record set
+      route53:
+        state: absent
+        zone: example.jp
+        record: www.example.jp
+        type: A
+        value:
+          - 192.168.1.1
+          - 192.168.2.1
+        ttl: 7200
