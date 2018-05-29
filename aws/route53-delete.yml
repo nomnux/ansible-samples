@@ -14,3 +14,27 @@
           - 192.168.1.1
           - 192.168.2.1
         ttl: 7200
+  tags:
+    - delete1
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  tasks:
+    - name: get record set
+      route53:
+        state: get
+        zone: example.jp
+        record: www.example.jp
+        type: A
+      register: rec
+    - name: delete record set
+      route53:
+        state: absent
+        zone: example.jp
+        record: www.example.jp
+        type: "{{ rec.set.type }}"
+        value: "{{ rec.set.value }}"
+        ttl: "{{ rec.set.ttl }}"
+  tags:
+    - delete2
