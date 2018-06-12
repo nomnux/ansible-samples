@@ -3,7 +3,7 @@
 - hosts: localhost
   gather_facts: False
   vars_files:
-    - ~/.slack/slack-ansible.yml
+    - ~/.slack/slack-ansible-vars.yml
   tasks:
     - name: send slack notification
       slack:
