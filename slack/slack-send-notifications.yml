@@ -1,0 +1,13 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  vars_files:
+    - ~/.slack/slack-ansible.yml
+  tasks:
+    - name: send slack notification
+      slack:
+        token: "{{ token }}"
+        msg: "Test message"
+        username: SENDER_USERNAME
+      delegate_to: localhost
