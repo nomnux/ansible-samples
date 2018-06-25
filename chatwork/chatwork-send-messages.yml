@@ -1,0 +1,18 @@
+---
+
+- hosts: localhost
+  gather_facts: False
+  vars_files:
+    - ~/.chatwork/chatwork-ansible-vars.yml
+  vars:
+    - msg: "Hello"
+    - msg2: "こんにちは"
+  tasks:
+    - name: send messages to chatwork room
+      uri:
+        url: https://api.chatwork.com/v2/rooms/{{ room_id }}/messages
+        method: POST
+        headers:
+          X-ChatWorkToken: "{{ token }}"
+        body: "body={{ msg }} {{ msg2 }}"
+      delegate_to: localhost
